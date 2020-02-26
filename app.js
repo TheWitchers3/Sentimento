@@ -49,8 +49,9 @@ app.get("/analyze", (req, res) => {
           res.json(tweetsAnalysis);
         }
       }
-    });
-  );
+    )
+  });
+});
 
   // to get data from the seeds file for testing purposes
   // var tweetAnalysis = seeds;
