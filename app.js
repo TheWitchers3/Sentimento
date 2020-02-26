@@ -53,10 +53,6 @@ app.get("/analyze", (req, res) => {
   });
 });
 
-  // to get data from the seeds file for testing purposes
-  // var tweetAnalysis = seeds;
-  // res.json(tweetAnalysis);
-});
 
 app.listen(process.env.PORT, process.env.IP, () => {
   console.log("Server started!!");
