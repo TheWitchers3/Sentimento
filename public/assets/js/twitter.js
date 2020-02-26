@@ -7,7 +7,7 @@ var rumordetectiontab = document.getElementById("nav-rumordetection");
 var topTopics=document.getElementById("topTopics");
 var searchtrend = document.getElementById("searchtrend");
 
-$.getJSON("http://127.0.0.1:5000/getTrending",function(data) {
+$.getJSON("https://twittersentimentanalyticsback.herokuapp.com/getTrending",function(data) {
   
   data=data[0];
   console.log(data);
