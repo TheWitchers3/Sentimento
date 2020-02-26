@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/senteements/Sentalize.git"
+    "url": "git+https://github.com/TheWitchers3/Sentimento.git"
   },
   "keywords": [
     "sentiments",
@@ -36,7 +36,7 @@
   "author": "Senteements",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/senteements/Sentalize/issues"
+    "url": "https://github.com/TheWitchers3/Sentimento/issues"
   },
-  "homepage": "https://github.com/senteements/Sentalize#readme"
+  "homepage": "ttps://github.com/TheWitchers3/Sentimento#readme"
 }
