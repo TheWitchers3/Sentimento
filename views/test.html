@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<body>
+
+    <h1>Sentiment Analysis</h1>
+    <div id="piechart"></div>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script type="text/javascript">
+
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Sentiment', '%tage'],
+                ['Positive', 83],
+                ['Negative', 10],
+                ['Neutral',7]
+            ]);
+
+            var options = { 'title': 'Sentiments', 'width': 550, 'height': 400 };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            chart.draw(data, options);
+        }
+    </script>
+
+</body>
+
+</html>

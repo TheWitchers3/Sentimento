@@ -1,0 +1,42 @@
+{
+  "name": "tsa",
+  "version": "1.0.0",
+  "description": "An application that analyses senitments of tweets from the tweeter",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "ejs": "^2.7.1",
+    "express": "^4.17.1",
+    "request": "^2.88.0",
+    "winston": "^3.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "none",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/senteements/Sentalize.git"
+  },
+  "keywords": [
+    "sentiments",
+    "tweets",
+    "sentiment",
+    "opinion",
+    "mining",
+    "tweeter",
+    "tweet",
+    "analyser",
+    "sentiment",
+    "analysis"
+  ],
+  "author": "Senteements",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/senteements/Sentalize/issues"
+  },
+  "homepage": "https://github.com/senteements/Sentalize#readme"
+}
