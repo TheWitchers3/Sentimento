@@ -5,7 +5,6 @@ var express = require("express"),
   bodyParser = require("body-parser"),
   app = express();
 
-const app = express();
 
 // Enable CORS
 let cors_options = 
