@@ -21,9 +21,9 @@ app.use(
 );
 
 app.get("/", (req, res) => {
-  
+  cors(req, res, async () => {
     res.render("home");
-
+  });
 });
 
 
