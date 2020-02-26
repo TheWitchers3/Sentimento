@@ -37,12 +37,13 @@ $.getJSON("https://twittersentimentanalyticsback.herokuapp.com/getTrending",func
 function runAnalyzer(searchtrend) {
   id=searchtrend.id;
   searchtrend=$('#'+id).text();
-  fetch("/analyze?searchtrend=" + searchtrend, 
-       headers : { 
+  fetch("/analyze?searchtrend=" + searchtrend, {
+      headers : { 
         'Content-Type': 'application/json',
         'Accept': 'application/json'
        }
-     )
+
+    })
     .then(response => response.json())
     .then(jsondata => {
       console.log(jsondata);
@@ -125,12 +126,13 @@ function runAnalyzer(searchtrend) {
 
 function runAnalyzerForCustom() {
 
-  fetch("/analyze?searchtrend=" + searchtrend.value, 
+  fetch("/analyze?searchtrend=" + searchtrend.value,{
       headers : { 
         'Content-Type': 'application/json',
         'Accept': 'application/json'
-       }  
-     )
+       }
+
+    })
     .then(response => response.json())
     .then(jsondata => {
       console.log(jsondata);
