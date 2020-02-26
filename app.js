@@ -1,6 +1,5 @@
 require("dotenv").config();
-var corsModule = require('cors')
-const cors=corsModule({origin:true})
+const cors = require('cors')({ origin: true });
 
 var express = require("express"),
   request = require("request"),
