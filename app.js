@@ -10,13 +10,6 @@ var express = require("express"),
 
 const http = require('http');
 
-const hostname = '127.0.0.1';
-const port = 3000;
-
-app.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
-
 var seeds = require("./seeds.js");
 
 app.set("view engine", "ejs");
@@ -48,7 +41,7 @@ app.get("/analyze", (req, res) => {
   console.log(query['searchtrend'])
 
   request(
-    "http://127.0.0.1:5000/analyze?query=" + query['searchtrend'],
+    "https://twittersentimentanalyticsback.herokuapp.com/analyze?query=" + query['searchtrend'],
       function(err, response, body) {
         if (!err && response.statusCode === 200) {
           var tweetsAnalysis = JSON.parse(body);
