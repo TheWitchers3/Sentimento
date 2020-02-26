@@ -1,11 +1,23 @@
 require("dotenv").config();
-const cors = require('cors')({ origin: true });
 
 var express = require("express"),
   request = require("request"),
   bodyParser = require("body-parser"),
   app = express();
-  app.use(cors())
+
+const app = express();
+
+// Enable CORS
+let cors_options = 
+{
+  "origin": "*",
+  "methods": "GET",
+  "preflightContinue": false,
+  "optionsSuccessStatus": 204
+}
+
+const cors = require('cors')(cors_options);
+app.use(cors);
 
 const http = require('http');
 
