@@ -1,15 +1,12 @@
 console.log("connected");
-var slider = document.getElementById("tweetsrange");
-var output = document.getElementById("numoftwtsinput");
 var toppostweetstab = document.getElementById("nav-toppostweets");
 var topnegtweetstab = document.getElementById("nav-topnegtweets");
 var rumordetectiontab = document.getElementById("nav-rumordetection");
-var topTopics=document.getElementById("topTopics");
 var searchtrend = document.getElementById("searchtrend");
 
-$.getJSON("https://twittersentimentanalyticsback.herokuapp.com/getTrending",function(data) {
-  
-  data=data[0];
+$.getJSON("http://127.0.0.1:5000/getTrending", function (data) {
+
+  data = data[0];
   console.log(data);
   $('#1st').text(data[0].toString());
   $('#2nd').text(data[1].toString());
@@ -35,19 +32,15 @@ $.getJSON("https://twittersentimentanalyticsback.herokuapp.com/getTrending",func
 
 
 function runAnalyzer(searchtrend) {
-  id=searchtrend.id;
-  searchtrend=$('#'+id).text();
-  fetch("/analyze?searchtrend=" + searchtrend, {
-      headers : { 
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-       }
-
-    })
+  id = searchtrend.id;
+  searchtrend = $('#' + id).text();
+  fetch("/analyze?searchtrend=" + searchtrend)
     .then(response => response.json())
     .then(jsondata => {
       console.log(jsondata);
-      google.charts.load("current", { packages: ["corechart"] });
+      google.charts.load("current", {
+        packages: ["corechart"]
+      });
       google.charts.setOnLoadCallback(drawChart);
 
       function drawChart() {
@@ -59,7 +52,12 @@ function runAnalyzer(searchtrend) {
           ["Negative", parseInt(ntp)]
         ]);
 
-        var options = { title: "Sentiments", width: 600, height: 400 ,colors: ['#065e23','#cf2a2a']};
+        var options = {
+          title: "Sentiments",
+          width: 600,
+          height: 400,
+          colors: ['#065e23', '#cf2a2a']
+        };
 
         var chart = new google.visualization.PieChart(
           document.getElementById("piechart")
@@ -71,7 +69,7 @@ function runAnalyzer(searchtrend) {
       var tempt;
       for (var i = 0; i < jsondata.positiveTweets.length; i++) {
         tempt = jsondata.positiveTweets[i].text;
-        if(tempt.substring(0,2)==="RT"){
+        if (tempt.substring(0, 2) === "RT") {
           tempt = tempt.substring(3);
         }
         postweets += "" + (i + 1) + ") " + tempt + "<br><br>";
@@ -79,7 +77,7 @@ function runAnalyzer(searchtrend) {
       toppostweetstab.innerHTML = postweets;
       for (var i = 0; i < jsondata.negativeTweets.length; i++) {
         tempt = jsondata.negativeTweets[i].text;
-        if(tempt.substring(0,2)==="RT"){
+        if (tempt.substring(0, 2) === "RT") {
           tempt = tempt.substring(3);
         }
         negtweets += "" + (i + 1) + ") " + tempt + "<br><br>";
@@ -88,33 +86,32 @@ function runAnalyzer(searchtrend) {
 
       //for rumor analysis
 
-      isRumor=jsondata.truthfulness;
-      phrasesUsed=jsondata.intersection;
+      isRumor = jsondata.truthfulness;
+      phrasesUsed = jsondata.intersection;
       console.log(phrasesUsed);
       var tempt;
 
-      var rumorAnalysis="";
+      var rumorAnalysis = "";
 
-      if(isRumor) {
-        rumorAnalysis+='The result of the rumor analysis is:<br>&emsp;<div style="color: #57c260d7;">TRUE <br>&emsp;The Tweets are true</div>';
+      if (isRumor) {
+        rumorAnalysis += 'The result of the rumor analysis is:<br>&emsp;<div style="color: #57c260d7;">TRUE <br>&emsp;The Tweets are true</div>';
 
+      } else if (!isRumor) {
+        rumorAnalysis += 'The result of the rumor analysis is:<br>&emsp;<div style="color: #c52323d7;">FALSE <br>&emsp;The Tweets are false</div>';
       }
-      else if(!isRumor) {
-        rumorAnalysis+='The result of the rumor analysis is:<br>&emsp;<div style="color: #c52323d7;">FALSE <br>&emsp;The Tweets are false</div>   ';
-      }
 
-      rumorAnalysis+="<div><br><br>Phrases used for detection of rumor: <br><br>";
+      rumorAnalysis += '<div style="color: #000000"><br><br>Phrases used for detection of rumor: <br><br>';
 
       for (var i = 0; i < phrasesUsed.length; i++) {
         tempt = phrasesUsed[i];
-        if(tempt.substring(0,2)==="RT"){
+        if (tempt.substring(0, 2) === "RT") {
           tempt = tempt.substring(3);
         }
         rumorAnalysis += "" + (i + 1) + ") " + tempt + "<br>";
       }
-      rumorAnalysis+="</div>";
+      rumorAnalysis += "</div>";
 
-      
+
 
       rumordetectiontab.innerHTML = rumorAnalysis;
 
@@ -126,17 +123,13 @@ function runAnalyzer(searchtrend) {
 
 function runAnalyzerForCustom() {
 
-  fetch("/analyze?searchtrend=" + searchtrend.value,{
-      headers : { 
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-       }
-
-    })
+  fetch("/analyze?searchtrend=" + searchtrend.value)
     .then(response => response.json())
     .then(jsondata => {
       console.log(jsondata);
-      google.charts.load("current", { packages: ["corechart"] });
+      google.charts.load("current", {
+        packages: ["corechart"]
+      });
       google.charts.setOnLoadCallback(drawChart);
 
       function drawChart() {
@@ -148,7 +141,12 @@ function runAnalyzerForCustom() {
           ["Negative", parseInt(ntp)]
         ]);
 
-        var options = { title: "Sentiments" ,colors: ['#065e23','#cf2a2a'], backgroundColor: {fill: '#bad4e0b', opacity: 100}};
+        var options = {
+          title: "Sentiments",
+          width: 600,
+          height: 400,
+          colors: ['#065e23', '#cf2a2a']
+        };
 
         var chart = new google.visualization.PieChart(
           document.getElementById("piechart")
@@ -160,7 +158,7 @@ function runAnalyzerForCustom() {
       var tempt;
       for (var i = 0; i < jsondata.positiveTweets.length; i++) {
         tempt = jsondata.positiveTweets[i].text;
-        if(tempt.substring(0,2)==="RT"){
+        if (tempt.substring(0, 2) === "RT") {
           tempt = tempt.substring(3);
         }
         postweets += "" + (i + 1) + ") " + tempt + "<br><br>";
@@ -168,7 +166,7 @@ function runAnalyzerForCustom() {
       toppostweetstab.innerHTML = postweets;
       for (var i = 0; i < jsondata.negativeTweets.length; i++) {
         tempt = jsondata.negativeTweets[i].text;
-        if(tempt.substring(0,2)==="RT"){
+        if (tempt.substring(0, 2) === "RT") {
           tempt = tempt.substring(3);
         }
         negtweets += "" + (i + 1) + ") " + tempt + "<br><br>";
@@ -177,30 +175,29 @@ function runAnalyzerForCustom() {
 
       //for rumor analysis
 
-      isRumor=jsondata.truthfulness;
-      phrasesUsed=jsondata.intersection;
+      isRumor = jsondata.truthfulness;
+      phrasesUsed = jsondata.intersection;
       console.log(phrasesUsed);
       var tempt;
-      var rumorAnalysis="";
+      var rumorAnalysis = "";
 
-      if(isRumor) {
-        rumorAnalysis+='The result of the rumor analysis is:<br>&emsp;<div style="color: #57c260d7;">TRUE <br>&emsp;The Tweets are true</div>';
+      if (isRumor) {
+        rumorAnalysis += 'The result of the rumor analysis is:<br>&emsp;<div style="color: #57c260d7;">TRUE <br>&emsp;The Tweets are true</div>';
 
+      } else if (!isRumor) {
+        rumorAnalysis += 'The result of the rumor analysis is:<br>&emsp;<div style="color: #c52323d7;">FALSE <br>&emsp;The Tweets are false</div>';
       }
-      else if(!isRumor) {
-        rumorAnalysis+='The result of the rumor analysis is:<br>&emsp;<div style="color: #c52323d7;">FALSE <br>&emsp;The Tweets are false</div>';
-      }
 
-      rumorAnalysis+='<div style="color: #000000"><br><br>Phrases used for detection of rumor: <br><br>';
+      rumorAnalysis += '<div style="color: #000000"><br><br>Phrases used for detection of rumor: <br><br>';
 
       for (var i = 0; i < phrasesUsed.length; i++) {
         tempt = phrasesUsed[i];
-        if(tempt.substring(0,2)==="RT"){
+        if (tempt.substring(0, 2) === "RT") {
           tempt = tempt.substring(3);
         }
         rumorAnalysis += "" + (i + 1) + ") " + tempt + "<br>";
       }
-      rumorAnalysis+="</div>";
+      rumorAnalysis += "</div>";
 
       rumordetectiontab.innerHTML = rumorAnalysis;
 
@@ -209,12 +206,39 @@ function runAnalyzerForCustom() {
   return false;
 }
 
-document.onreadystatechange = function() {
+document.onreadystatechange = function () {
   var state = document.readyState;
   if (state == "complete") {
-    setTimeout(function() {
+    setTimeout(function () {
       document.getElementById("interactive");
       document.getElementById("load").style.visibility = "hidden";
     }, 1500);
   }
 };
+
+
+var interval = setInterval(function () {
+  $.getJSON("http://127.0.0.1:5000/notif", function (data) {
+    console.log(data);
+    var keyword = data['notif'];
+    $('#searchtrend').val(keyword);
+    $('#submitbtn').click();
+    if (Notification.permission !== 'granted') {
+      Notification.requestPermission();
+    } else {
+      var notification = new Notification('New Keyword just started trending!', {
+        icon: 'public/assets/twitter.jpg',
+        body: 'Hey, a new keyword: ' + keyword + ' is trending',
+      });
+      notification.onclick = function () {
+        
+          window.focus();
+      };
+    }
+  });
+}, 30000);
+
+
+function notifyMe(keyword) {
+
+}
