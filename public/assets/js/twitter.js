@@ -4,8 +4,8 @@ var topnegtweetstab = document.getElementById("nav-topnegtweets");
 var rumordetectiontab = document.getElementById("nav-rumordetection");
 var searchtrend = document.getElementById("searchtrend");
 
-$.getJSON("http://127.0.0.1:5000/getTrending", function (data) 
-{
+$.getJSON("http://127.0.0.1:5000/getTrending", function (data) {
+
   data = data[0];
   console.log(data);
   $('#1st').text(data[0].toString());
@@ -88,6 +88,7 @@ function runAnalyzer(searchtrend) {
 
       isRumor = jsondata.truthfulness;
       phrasesUsed = jsondata.intersection;
+      title = jsondata.title;
       console.log(phrasesUsed);
       var tempt;
 
@@ -100,6 +101,8 @@ function runAnalyzer(searchtrend) {
         rumorAnalysis += 'The result of the rumor analysis is:<br>&emsp;<div style="color: #c52323d7;">FALSE <br>&emsp;The Tweets are false</div>';
       }
 
+      rumorAnalysis += '<div style="color: #000000; font-size:14px; "><br><br>Closest Related Headline: <br>&emsp;' + capitalizeFirstLetter(camelCase(title).replace(/([A-Z]+)/g, " $1").replace(/([A-Z][a-z])/g, " $1")) + '<br></div>';
+
       rumorAnalysis += '<div style="color: #000000"><br><br>Phrases used for detection of rumor: <br><br>';
 
       for (var i = 0; i < phrasesUsed.length; i++) {
@@ -110,8 +113,6 @@ function runAnalyzer(searchtrend) {
         rumorAnalysis += "" + (i + 1) + ") " + tempt + "<br>";
       }
       rumorAnalysis += "</div>";
-
-
 
       rumordetectiontab.innerHTML = rumorAnalysis;
 
@@ -177,6 +178,7 @@ function runAnalyzerForCustom() {
 
       isRumor = jsondata.truthfulness;
       phrasesUsed = jsondata.intersection;
+      title = jsondata.title;
       console.log(phrasesUsed);
       var tempt;
       var rumorAnalysis = "";
@@ -187,6 +189,8 @@ function runAnalyzerForCustom() {
       } else if (!isRumor) {
         rumorAnalysis += 'The result of the rumor analysis is:<br>&emsp;<div style="color: #c52323d7;">FALSE <br>&emsp;The Tweets are false</div>';
       }
+
+      rumorAnalysis += '<div style="color: #000000"; font-size:14px; "><br><br>Closest Related Headline: <br>&emsp;' + capitalizeFirstLetter(camelCase(title).replace(/([A-Z]+)/g, " $1").replace(/([A-Z][a-z])/g, " $1")) + '<br></div>';
 
       rumorAnalysis += '<div style="color: #000000"><br><br>Phrases used for detection of rumor: <br><br>';
 
@@ -224,21 +228,28 @@ var interval = setInterval(function () {
 
     if (Notification.permission !== 'granted') {
       Notification.requestPermission();
-    } 
-    else
-    {
-      var notification = new Notification('Hey! Something is trending!', {
+    } else {
+      var notification = new Notification('New Keyword just started trending!', {
         icon: 'public/assets/twitter.jpg',
-        body: 'Hey,"' + keyword + '" is trending. Click to find out more!!!',
+        body: 'Hey, a new keyword: ' + keyword + ' is trending',
       });
-      notification.onclick = function () 
-      {
-          window.focus();
-          $('#searchtrend').val(keyword);
-          $('#submitbtn').click();
+      notification.onclick = function () {
+        window.focus();
+        $('#searchtrend').val(keyword);
+        $('#submitbtn').click();
       };
     }
   });
 }, 30000);
 
-function notifyMe(keyword) {}
+
+function camelCase(str) {
+  return str.replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, function(match, index) {
+    if (+match === 0) return ""; // or if (/\s+/.test(match)) for white spaces
+    return index === 0 ? match.toLowerCase() : match.toUpperCase();
+  });
+}
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
