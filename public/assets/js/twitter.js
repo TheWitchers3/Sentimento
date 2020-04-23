@@ -4,8 +4,8 @@ var topnegtweetstab = document.getElementById("nav-topnegtweets");
 var rumordetectiontab = document.getElementById("nav-rumordetection");
 var searchtrend = document.getElementById("searchtrend");
 
-$.getJSON("http://127.0.0.1:5000/getTrending", function (data) {
-
+$.getJSON("http://127.0.0.1:5000/getTrending", function (data) 
+{
   data = data[0];
   console.log(data);
   $('#1st').text(data[0].toString());
@@ -221,24 +221,24 @@ var interval = setInterval(function () {
   $.getJSON("http://127.0.0.1:5000/notif", function (data) {
     console.log(data);
     var keyword = data['notif'];
-    $('#searchtrend').val(keyword);
-    $('#submitbtn').click();
+
     if (Notification.permission !== 'granted') {
       Notification.requestPermission();
-    } else {
-      var notification = new Notification('New Keyword just started trending!', {
+    } 
+    else
+    {
+      var notification = new Notification('Hey! Something is trending!', {
         icon: 'public/assets/twitter.jpg',
-        body: 'Hey, a new keyword: ' + keyword + ' is trending',
+        body: 'Hey,"' + keyword + '" is trending. Click to find out more!!!',
       });
-      notification.onclick = function () {
-        
+      notification.onclick = function () 
+      {
           window.focus();
+          $('#searchtrend').val(keyword);
+          $('#submitbtn').click();
       };
     }
   });
 }, 30000);
 
-
-function notifyMe(keyword) {
-
-}
+function notifyMe(keyword) {}
