@@ -3,14 +3,20 @@
   type="text/javascript"
   src="https://www.gstatic.com/charts/loader.js">
 </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+  type="text/javascript"
+  src="../public/assets/js/twitter.js">
+</script>
 
+<body>
 <div class="container pt-4">
   <h2 class="display-1 text-center mb-5" id="topic">
     Twitter Sentiment Analyzer
   </h2>
   <div class="row justify-content-around">
 
-    <div class="col-md-6 bg-light rounded-lg" id="inputform">
+    <div class="col-md-5 bg-light rounded-lg" id="inputform">
       <form class="pt-3" onsubmit="return runAnalyzerForCustom();">
         <div class="form-group">
           <label for="searchtrend">Analyze a trend</label>
@@ -34,7 +40,7 @@
       </form>
     
     
-      <h3 style="color: #161616c0">Top Trending Keywords in India</h3>
+      <h3 style="color: #161616c0">Top 10 Trending Keywords in India</h3>
         <div class="col-8 pr-0" id="topTopics">
             <button type="button" class="btn btn-primary" style="margin: 5px; background-color: rgba(55, 185, 224, 0.897);" id="1st" onclick="return runAnalyzer(this);"></button>
             <button type="button" class="btn btn-primary" style="margin: 5px; background-color: rgba(55, 185, 224, 0.897);" id="2nd" onclick="return runAnalyzer(this);"></button>
@@ -57,9 +63,9 @@
             <button type="button" class="btn btn-primary" style="margin: 5px; background-color: rgba(55, 185, 224, 0.897);" id="20th" onclick="return runAnalyzer(this);"></button>
         </div>
     </div>
-    <div class="col-md-5 bg-light rounded-lg" style="background-color: #c5232300; width: fit-content;">
+    <div class="col-md-6 bg-light rounded-lg">
       <nav>
-        <div class="nav nav-tabs" id="nav-tab" role="tablist" style="background-color: #c5232300; width:fit-content">
+        <div class="nav nav-tabs" id="nav-tab" role="tablist" style="background-color: #c5232300;">
           <a
             class="nav-item nav-link active"
             id="nav-analysis-tab"
@@ -101,16 +107,15 @@
             >Rumor Detection</a>
         </div>
       </nav>
-      <div class="tab-content" id="nav-tabContent" style="background-color: #c5232300; width: fit-content;">
+      <div class="tab-content" id="nav-tabContent">
         <div
           class="tab-pane fade show active"
           id="nav-analysis"
           role="tabpanel"
           aria-labelledby="nav-analysis-tab"
-          style="background-color: #c5232300; width: fit-content;"
         >
           Analysis over here
-          <div id="piechart" style="background-color: #c5232300; width: fit-content;"></div>
+          <div id="piechart"></div>
         </div>
         <div
           class="tab-pane fade"
@@ -141,5 +146,6 @@
     </div>
   </div>
 </div>
+</body>
 <script src="./assets/js/twitter.js"></script>
 <% include partials/footer %>
