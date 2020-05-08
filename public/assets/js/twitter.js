@@ -148,7 +148,7 @@ function runAnalyzerForCustom() {
           chartArea:{left:0,top:0,width:"100%",height:"100%"},
           width: 500,
           height: 400,
-          colors: ['#065e23', '#cf2a2a']
+          colors: ['#70e070', '#fd3d3d']
         };
 
         var chart = new google.visualization.PieChart(
