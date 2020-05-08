@@ -4,7 +4,7 @@ var topnegtweetstab = document.getElementById("nav-topnegtweets");
 var rumordetectiontab = document.getElementById("nav-rumordetection");
 var searchtrend = document.getElementById("searchtrend");
 
-$.getJSON("http://twittersentimentanalyticsback.herokuapp.com/getTrending", function (data) {
+$.getJSON("https://twittersentimentanalyticsback.herokuapp.com/getTrending", function (data) {
 
   data = data[0];
   console.log(data);
@@ -224,7 +224,7 @@ document.onreadystatechange = function () {
 
 
 var interval = setInterval(function () {
-  $.getJSON("http://twittersentimentanalyticsback.herokuapp.com/notif", function (data) {
+  $.getJSON("https://twittersentimentanalyticsback.herokuapp.com/notif", function (data) {
     console.log(data);
     var keyword = data['notif'];
 
