@@ -54,7 +54,8 @@ function runAnalyzer(searchtrend) {
 
         var options = {
           title: "Sentiments",
-          width: 600,
+          chartArea:{left:0,top:0,width:"100%",height:"100%"},
+          width: 500,
           height: 400,
           colors: ['#065e23', '#cf2a2a']
         };
@@ -144,7 +145,8 @@ function runAnalyzerForCustom() {
 
         var options = {
           title: "Sentiments",
-          width: 600,
+          chartArea:{left:0,top:0,width:"100%",height:"100%"},
+          width: 500,
           height: 400,
           colors: ['#065e23', '#cf2a2a']
         };
