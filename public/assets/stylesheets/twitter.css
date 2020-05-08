@@ -1,15 +1,17 @@
 body{
-  background-color: #ffffffb6;
+  background-color: #bad4e0b6;
   color: #161616c0;
   height: 100%;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  background-image: url("../545650.jpg");
 }
 #topic {
   font-size: 72px;
   font-weight: bold;
-  background: #161616c0;
+  color: #f1f1f1;
+  background: #ffffff;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
