@@ -56,7 +56,7 @@ app.get("/analyze", (req, res) => {
   console.log(query['searchtrend'])
 
   request(
-    "http://twittersentimentanalyticsback.herokuapp.com/analyze?query=" + query['searchtrend'],
+    "https://twittersentimentanalyticsback.herokuapp.com/analyze?query=" + query['searchtrend'],
     function(err, response, body) {
       if (!err && response.statusCode === 200) {
         var tweetsAnalysis = JSON.parse(body);
