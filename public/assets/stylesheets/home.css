@@ -434,7 +434,7 @@ textarea#message {
 #hero {
   width: 100%;
   height: 100vh;
-  background: url(../tsa.jpg) top center;
+  background: url(../tsa.jpeg) top center;
   background-size: cover;
   position: relative;
 }
